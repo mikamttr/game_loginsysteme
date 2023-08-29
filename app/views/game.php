@@ -1,6 +1,4 @@
 <link rel="stylesheet" href="app/game/game.css">
-<script src="https://kit.fontawesome.com/e9f6068462.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <a class="btn btn-lg px-0 my-3" href="index.php">
     <i class="bi bi-arrow-left"></i>
