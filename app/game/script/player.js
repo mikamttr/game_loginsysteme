@@ -3,14 +3,14 @@ export class Player {
         this.game = game;
         this.width = 107;
         this.height = 37;
-        this.x = 100;
+        this.x = 30;
         this.y = 160;
         this.speed = 6;
         this.lives = 3;
         this.image = document.getElementById('player');
         this.scoreDisplay = document.getElementById('score');
         this.heartsDisplay = document.getElementById('hearts');
-        this.heartIcon = '<i class="fa-solid fa-heart"></i>';
+        this.heartIcon = '<i class="bi bi-heart-fill"></i>';
     }
     update() {
         if (keys.up.pressed && lastKey === 'up') this.y = this.y - this.speed;
@@ -25,33 +25,24 @@ export class Player {
     }
     updatePlayerInfo() {
         // score display
-        this.scoreDisplay.textContent = 'Score : ' + ((this.game.score / 60).toFixed(0));
+        this.scoreDisplay.textContent = 'Score : ' + this.game.score;
         // lives display
-        switch (this.lives) {
-            case 0 :
-                this.heartsDisplay.innerHTML = '';
-                return
-            case 1 :
-                this.heartsDisplay.innerHTML = this.heartIcon;
-                return
-            case 2 :
-                this.heartsDisplay.innerHTML = this.heartIcon + this.heartIcon;
-                return
-            case 3 :
-                this.heartsDisplay.innerHTML = this.heartIcon + this.heartIcon + this.heartIcon;
-                return
+        var hearts = '';
+        for (var i = 0; i < this.lives; i++) {
+            hearts += this.heartIcon;
         }
+        this.heartsDisplay.innerHTML = hearts;
     }
 }
 
 // key input handler
 const keys = {
-    up: {pressed: false},
-    down: {pressed: false},
+    up: { pressed: false },
+    down: { pressed: false },
 }
 
 let lastKey = ''
-$(document).on('keydown', (e) => {
+document.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowUp':
             keys.up.pressed = true
@@ -64,7 +55,7 @@ $(document).on('keydown', (e) => {
             break
     }
 })
-$(document).on('keyup', (e) => {
+document.addEventListener('keyup', (e) => {
     switch (e.key) {
         case 'ArrowUp':
             keys.up.pressed = false

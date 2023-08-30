@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="app/game/game.css">
 
-<a class="btn btn-lg px-0 my-3" href="index.php">
+<!-- <a class="btn btn-lg px-0 my-3" href="index.php">
     <i class="bi bi-arrow-left"></i>
     Back to Home
-</a>
+</a> -->
 
 <div class="game_container">
     <div id="player_info">
@@ -11,6 +11,17 @@
         <div id="hearts"></div>
     </div>
     <canvas></canvas>
+
+    <div id="game_launcher">
+        <span class="fs-1 fw-bold mb-4">Ready to start ?</span>
+        <button id="launchGameBtn" class="btn btn-outline-light btn-lg">Launch Game</button>
+    </div>
+
+    <div id="gameover_info">
+        <span class="fs-1 fw-bold mb-4">Game Over</span>
+        <span class="fs-2 mb-5">Score : 111</span>
+        <button id="newgameBtn" class="btn btn-outline-light btn-lg">Start New Game</button>
+    </div>
 </div>
 
 <!-- game props -->

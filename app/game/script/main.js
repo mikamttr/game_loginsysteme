@@ -2,7 +2,10 @@ import { Player } from './player.js';
 import { Rocket } from './rocket.js';
 import { Background } from './background_layer.js';
 
-$(document).ready(function () {
+function rungame() {
+    document.querySelector('#game_launcher').style.display = "none";
+    document.querySelector('#gameover_info').style.display = "none";
+
     // canvas setup
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
@@ -20,6 +23,7 @@ $(document).ready(function () {
             this.rockets = [];
             this.collisionNumber = 0;
             this.gameOver = false;
+            this.scoreCount = 0;
             this.score = 0;
             this.speed = 3;
         }
@@ -28,8 +32,10 @@ $(document).ready(function () {
             this.background.update();
             this.background.layer5.update();
             this.player.update();
-            this.score++;
-            this.rocketInterval = (this.rocketInterval - 0.1); // augmente l'interval de génération des rockets
+            this.scoreCount++;
+            this.score = Math.round(this.scoreCount * 0.025);
+            // augmente l'interval de génération des rockets
+            this.rocketInterval = (this.rocketInterval - 0.1);
             // console.log(this.rocketInterval);
             this.rockets.forEach(rocket => {
                 rocket.update();
@@ -38,9 +44,9 @@ $(document).ready(function () {
                     this.collisionNumber++;
                     this.player.lives--;
                 }
-                if (this.player.lives < 0) {
+                if (this.player.lives <= 0) {
                     this.gameOver = true;
-                    alert("Game Over \nActualisez la page pour lancer une nouvelle partie");
+                    handleGamerOver();
                 }
             });
             this.rockets = this.rockets.filter(rocket => !rocket.markedForDeletion);
@@ -81,6 +87,15 @@ $(document).ready(function () {
         if (!game.gameOver) requestAnimationFrame(animate);
     }
     animate(0);
+}
 
-});
+function handleGamerOver() {
+    document.querySelector("#hearts").innerHTML = '';
+    document.querySelector('#gameover_info').style.display = "flex";
+}
 
+const launchBtn = document.querySelector("#launchGameBtn");
+launchBtn.addEventListener("click", rungame);
+
+const newgameBtn = document.querySelector("#newgameBtn");
+newgameBtn.addEventListener("click", rungame);
