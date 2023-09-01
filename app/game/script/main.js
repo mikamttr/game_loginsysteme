@@ -5,12 +5,12 @@ import { Background } from './background_layer.js';
 function rungame() {
     document.querySelector('#game_launcher').style.display = "none";
     document.querySelector('#gameover_info').style.display = "none";
+    window.innerWidth < 900 && (document.querySelector('#game_arrows').style.display = "flex");
 
-    // canvas setup
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 600;
-    canvas.height = 400;
+    canvas.height = 375;
 
     class Game {
         constructor(width, height) {
@@ -36,7 +36,6 @@ function rungame() {
             this.score = Math.round(this.scoreCount * 0.025);
             // augmente l'interval de génération des rockets
             this.rocketInterval = (this.rocketInterval - 0.1);
-            // console.log(this.rocketInterval);
             this.rockets.forEach(rocket => {
                 rocket.update();
                 if (this.checkCollision(this.player, rocket)) {
@@ -46,7 +45,7 @@ function rungame() {
                 }
                 if (this.player.lives <= 0) {
                     this.gameOver = true;
-                    handleGamerOver();
+                    handleGamerOver(this.score);
                 }
             });
             this.rockets = this.rockets.filter(rocket => !rocket.markedForDeletion);
@@ -89,13 +88,29 @@ function rungame() {
     animate(0);
 }
 
-function handleGamerOver() {
-    document.querySelector("#hearts").innerHTML = '';
-    document.querySelector('#gameover_info').style.display = "flex";
-}
-
 const launchBtn = document.querySelector("#launchGameBtn");
 launchBtn.addEventListener("click", rungame);
 
 const newgameBtn = document.querySelector("#newgameBtn");
 newgameBtn.addEventListener("click", rungame);
+
+function handleGamerOver(score) {
+    document.querySelector("#hearts").innerHTML = '';
+    document.querySelector('#gameover_info').style.display = "flex";
+    document.querySelector("#endgameScore").textContent = "Score : " + score;
+
+    var xhr = new XMLHttpRequest();
+    var url = 'index.php?controller=game&action=gameover';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = xhr.responseText;
+            console.log(response);
+        }
+    };
+    var data = 'score=' + score;
+
+    xhr.send(data);
+}

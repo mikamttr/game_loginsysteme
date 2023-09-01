@@ -66,3 +66,43 @@ document.addEventListener('keyup', (e) => {
             break
     }
 })
+
+const upButton = document.getElementById('btnUp');
+const downButton = document.getElementById('btnDown');
+
+upButton.addEventListener('mousedown', () => {
+    keys.up.pressed = true;
+    lastKey = 'up';
+});
+
+downButton.addEventListener('mousedown', () => {
+    keys.down.pressed = true;
+    lastKey = 'down';
+});
+
+upButton.addEventListener('mouseup', () => {
+    keys.up.pressed = false;
+});
+
+downButton.addEventListener('mouseup', () => {
+    keys.down.pressed = false;
+});
+
+// Event listeners for touch screen support
+upButton.addEventListener('touchstart', () => {
+    keys.up.pressed = true;
+    lastKey = 'up';
+});
+
+downButton.addEventListener('touchstart', () => {
+    keys.down.pressed = true;
+    lastKey = 'down';
+});
+
+upButton.addEventListener('touchend', () => {
+    keys.up.pressed = false;
+});
+
+downButton.addEventListener('touchend', () => {
+    keys.down.pressed = false;
+});

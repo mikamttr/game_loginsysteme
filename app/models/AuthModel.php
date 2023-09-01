@@ -65,6 +65,7 @@ class AuthModel
         $_SESSION['usersId'] = $user->usersId;
         $_SESSION['usersName'] = $user->usersName;
         $_SESSION['usersEmail'] = $user->usersEmail;
+        $_SESSION['usersUid'] = $user->usersUid;
         redirect("index.php");
     }
 

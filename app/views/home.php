@@ -1,48 +1,62 @@
+<?php
+require_once './app/models/GameModel.php';
+$this->model = new GameModel;
+?>
+
 <h1>
     Hello <?php echo explode(" ", $_SESSION['usersName'])[0]; ?>,
     <br>
     Welcome to Fighter plane
 </h1>
 
-<a class="btn btn-outline-success btn-lg px-5 my-3" href="index.php?controller=home&action=play">
+<a class="btn btn-outline-success btn-lg px-5 my-3" href="index.php?controller=game&action=play">
     <i class="bi bi-controller me-2"></i>
     Play
 </a>
 
-<h4 class="my-3">Best Scores</h4>
+<div class="my-4">
+    <span class="fs-4">Your best score is :
+        <?php $this->model->getUsersBestScore(); ?>
+    </span>
+</div>
 
 <div class="col-lg-8">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Ranking</th>
-                <th scope="col">Username</th>
-                <th scope="col">Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">
-                    <i class="bi bi-trophy-fill mx-1" style="color: #d4af37;"></i> 1
-                </th>
-                <td>Mark</td>
-                <td>145</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <i class="bi bi-trophy-fill mx-1" style="color: #c0c0c0;"></i> 2
-                </th>
-                <td>Jacob</td>
-                <td>114</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <i class="bi bi-trophy-fill mx-1" style="color: #614e1a;"></i> 3
-                </th>
-                <td>Larry</td>
-                <td>103</td>
-            </tr>
-        </tbody>
+    <?php
+    $usersScores  = $this->model->getAllBestScores();
+    // Sort the array by 'usersScore' in descending order
+    usort($usersScores, function ($a, $b) {
+        return $b->usersScore - $a->usersScore;
+    });
 
-    </table>
+    // Define medal colors
+    $medalColors = ['#d4af37', '#c0c0c0', '#614e1a'];
+
+    // Start the ranking at 1
+    $ranking = 1;
+
+    echo '
+    <table class="table table-hover">
+    <thead><tr><th scope="col">Ranking</th><th scope="col">Username</th><th scope="col">Score</th></tr></thead>
+    <tbody>';
+
+    // Loop through the sorted array and generate table rows
+    foreach ($usersScores as $user) {
+        // Determine the medal color based on the ranking
+        $medalColor = isset($medalColors[$ranking - 1]) ? $medalColors[$ranking - 1] : '';
+
+        echo '<tr><th scope="row">';
+        if ($ranking <= 3) {
+            echo '<i class="bi bi-trophy-fill mx-1" style="color: ' . $medalColor . ';"></i>';
+        }
+        echo $ranking;
+        echo '</th>';
+        echo '<td>' . htmlspecialchars($user->usersName) . '</td>';
+        echo '<td>' . htmlspecialchars($user->usersScore) . '</td></tr>';
+
+        // Increment the ranking
+        $ranking++;
+    }
+
+    echo '</tbody></table>';
+    ?>
 </div>

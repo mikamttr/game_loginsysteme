@@ -1,17 +1,36 @@
+:root {
+    --game_width: 600px;
+    --game_height: 375px;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: rgb(33, 37, 41);
+}
+
+
 .game_container {
     position: relative;
-    width: 600px;
-    height: 435px;
+    max-width: 100%;
+    height: auto;
+    display: block;
     margin: 0 auto;
 }
 
 #player_info {
+    position: absolute;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 600px;
+    width: 100%;
+    max-width: var(--game_width);
     height: 35px;
-    background: #6ab0da;
 }
 
 #score {
@@ -34,32 +53,37 @@ canvas {
     background-image: url('src/sky.png');
 }
 
-#game_launcher {
-    display: flex;
+#game_arrows {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--game_width);
+    padding-inline: 5px;
+}
+
+#game_launcher,
+#gameover_info {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    height: var(--game_height);
     width: 100%;
+    max-width: var(--game_width);
     position: absolute;
     top: 0;
     backdrop-filter: blur(2px);
-    color: white;
+}
+
+#game_launcher {
+    display: flex;
     background-image: url('src/backgroundLauncher.png');
     background-size: cover;
 }
 
 #gameover_info {
     display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    backdrop-filter: blur(2px);
-    color: white;
 }
 
 #player,

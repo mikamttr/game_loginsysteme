@@ -5,14 +5,8 @@
 
 
 <form action="">
-    <div>bests scores</div>
+    <div>Full Name : <?php echo $_SESSION['usersName']; ?></div>
+    <div>Your best score : 89</div>
     <div>Username</div>
-
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="<?php echo explode(" ", $_SESSION['usersName'])[0]; ?>">
-
-    <label for="surname" class="form-label">Surname</label>
-    <input type="text" class="form-control" id="surname" placeholder="<?php echo explode(" ", $_SESSION['usersName'])[1]; ?>">
-
     <div>email</div>
 </form>

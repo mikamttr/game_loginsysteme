@@ -33,10 +33,10 @@
                             <i class="fs-5 bi bi-person-circle"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="index.php?controller=home&action=index">
+                            <li><a class="dropdown-item" href="index.php?controller=game&action=home">
                                     <i class="bi bi-house mx-1"></i> Home</a>
                             </li>
-                            <li><a class="dropdown-item" href="index.php?controller=home&action=profile">
+                            <li><a class="dropdown-item" href="index.php?controller=game&action=profile">
                                     <i class="bi bi-person mx-1"></i> Profile</a>
                             </li>
                             <li class="px-3">
