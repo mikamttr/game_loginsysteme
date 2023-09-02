@@ -1,8 +1,4 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-
 
 function flash($name = '', $message = '', $class = 'alert alert-danger')
 {

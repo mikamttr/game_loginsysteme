@@ -32,13 +32,13 @@ class AuthController
         $this->view->display('signup');
     }
 
-    public function reset_password()
+    public function logout()
     {
-        $this->view->display('reset_password');
-    }
-
-    public function create_new_password()
-    {
-        $this->view->display('create_new_password');
+        session_start();
+        unset($_SESSION['usersId']);
+        unset($_SESSION['usersName']);
+        unset($_SESSION['usersEmail']);
+        session_destroy();
+        redirect("index.php");
     }
 }

@@ -1,6 +1,3 @@
 <?php
 
-require 'app/Dispatcher.php';
-
-$dispatcher = new Dispatcher;
-$dispatcher->dispatch();
+require 'app/core/init.php';

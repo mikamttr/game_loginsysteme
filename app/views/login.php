@@ -1,5 +1,3 @@
-<?php include_once './app/helpers/helper.php' ?>
-
 <div class="mx-auto col-10 col-md-6 col-lg-4 my-5">
     <h1 class="display-5 my-4">Login</h1>
 
@@ -11,7 +9,7 @@
         <input class="form-control " type="text" name="name/email" placeholder="Email or username">
         <input class="form-control " type="password" name="usersPwd" placeholder="Password">
 
-        <a class="form-text" href="index.php?controller=auth&action=reset_password">
+        <a class="form-text" href="index.php?controller=resetPassword&action=reset_password">
             Forgot password?
         </a>
 

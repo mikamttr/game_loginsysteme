@@ -42,7 +42,7 @@
                             <li class="px-3">
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="logout.php">
+                            <li><a class="dropdown-item" href="index.php?controller=auth&action=logout">
                                     <i class="bi bi-box-arrow-right mx-1"></i> Logout</a></li>
                         </ul>
                     </div>

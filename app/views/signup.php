@@ -1,5 +1,3 @@
-<?php include_once './app/helpers/helper.php' ?>
-
 <div class="mx-auto col-10 col-md-6 col-lg-4 my-5">
     <h1 class="display-5 my-4">Sign Up</h1>
 
