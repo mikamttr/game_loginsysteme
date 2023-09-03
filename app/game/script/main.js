@@ -45,7 +45,6 @@ function rungame() {
                 }
                 if (this.player.lives <= 0) {
                     this.gameOver = true;
-                    handleGamerOver(this.score);
                 }
             });
             this.rockets = this.rockets.filter(rocket => !rocket.markedForDeletion);
@@ -84,6 +83,7 @@ function rungame() {
         game.update(deltaTime);
         game.draw(ctx);
         if (!game.gameOver) requestAnimationFrame(animate);
+        if (game.gameOver) handleGamerOver(game.score);
     }
     animate(0);
 }
@@ -113,4 +113,6 @@ function handleGamerOver(score) {
     var data = 'score=' + score;
 
     xhr.send(data);
+
+    console.log("main js handle game over called");
 }

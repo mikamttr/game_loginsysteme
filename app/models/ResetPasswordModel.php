@@ -23,8 +23,8 @@ class ResetPasswordModel extends AuthModel
         $this->mail->Host = 'sandbox.smtp.mailtrap.io';
         $this->mail->SMTPAuth = true;
         $this->mail->Port = 2525;
-        $this->mail->Username = '9b0dfe18f44718';
-        $this->mail->Password = '966469e2f87394';
+        $this->mail->Username = '9b0dfe18******';
+        $this->mail->Password = '966469e2******';
     }
 
     private function deleteEmail($email)

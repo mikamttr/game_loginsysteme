@@ -3,6 +3,10 @@
     --game_height: 375px;
 }
 
+* {
+    user-select: none;
+}
+
 html,
 body {
     height: 100%;

@@ -22,7 +22,7 @@ $this->model = new GameModel;
 
 <div class="col-lg-8">
     <?php
-    $usersScores  = $this->model->getAllBestScores();
+    $usersScores  = $this->model->getTopScores(10);
     // Sort the array by 'usersScore' in descending order
     usort($usersScores, function ($a, $b) {
         return $b->usersScore - $a->usersScore;
@@ -46,7 +46,7 @@ $this->model = new GameModel;
 
         echo '<tr><th scope="row">';
         if ($ranking <= 3) {
-            echo '<i class="bi bi-trophy-fill mx-1" style="color: ' . $medalColor . ';"></i>';
+            echo '<i class="bi bi-trophy-fill me-1" style="color: ' . $medalColor . ';"></i>';
         }
         echo $ranking;
         echo '</th>';

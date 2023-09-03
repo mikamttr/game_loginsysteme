@@ -6,7 +6,7 @@ class Dispatcher
     {
         // Autoload classes
         spl_autoload_register(function ($class) {
-            require_once 'app/controllers/' . $class . '.php';
+            require_once './app/controllers/' . $class . '.php';
         });
 
         if (isset($_SESSION['usersId'])) {

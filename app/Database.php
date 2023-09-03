@@ -1,17 +1,19 @@
 <?php
-/*
-    * PDO Database Class
-    * Connect to database
-    * Create prepared statements
-    * Bind values
-    * Return rows and results
-*/
+
+/**
+ * PDO Database Class
+ * Connect to database
+ * Create prepared statements
+ * Bind values
+ * Return rows and results
+ */
+
 class Database
 {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pass = '';
-    private $dbname = 'mini-jeu';
+    private $host = HOST;
+    private $user = USER;
+    private $pass = PASS;
+    private $dbname = DBNAME;
 
     //Will be the PDO object
     private $dbh;

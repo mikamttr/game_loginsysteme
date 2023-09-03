@@ -21,13 +21,13 @@
     <div class="row mt-3">
         <div class="col-lg-6 col-md-8">
             <label for="currentPassword" class="form-label">Current Password</label>
-            <input type="password" id="currentPassword" class="form-control" placeholder="Enter your current password">
+            <input type="password" id="currentPassword" class="form-control" placeholder="Enter your current password" autocomplete="off">
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-lg-6 col-md-8">
             <label for="newPassword" class="form-label">New Password</label>
-            <input type="password" id="newPassword" class="form-control" placeholder="Enter new password" aria-describedby="passwordHelpBlock">
+            <input type="password" id="newPassword" class="form-control" placeholder="Enter new password" aria-describedby="passwordHelpBlock" autocomplete="off">
             <div id="passwordHelpBlock" class="form-text">
                 <span class="text-danger">*</span>
                 Your password must be at least 6 characters long
@@ -37,7 +37,7 @@
     <div class="row mt-2">
         <div class="col-lg-6 col-md-8">
             <label for="repeatPassword" class="form-label">Repeat Password</label>
-            <input type="password" id="repeatPassword" class="form-control" placeholder="Repeat new password">
+            <input type="password" id="repeatPassword" class="form-control" placeholder="Repeat new password" autocomplete="off">
         </div>
     </div>
     <div class="row my-4">

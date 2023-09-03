@@ -9,7 +9,7 @@ class GameModel
         $this->db = new Database;
     }
 
-    private function compareUserScore($score)
+    private function updateUserScore($score)
     {
         $sql = "SELECT usersUid, usersBestScore FROM users WHERE usersUid = :userUid";
         $this->db->query($sql);
@@ -26,14 +26,14 @@ class GameModel
                 $this->db->bind(':newBestScore', $new_best_score);
                 $this->db->bind(':userUid', $_SESSION["usersUid"]);
                 $this->db->execute();
-                echo "\n Your best score is now : " . $new_best_score;
+                echo "\n New best score : " . $new_best_score;
             } else {
-                echo "\n Better luck next time ... Your best score is : " . $user->usersBestScore;
+                echo "\n Current best score : " . $user->usersBestScore;
             }
         }
     }
 
-    private function compareBestScores($score)
+    private function updateBestScores($score)
     {
         // Select the lowest score from the scores table
         $sql = "SELECT MIN(usersScore) AS lowestScore FROM scores";
@@ -44,16 +44,20 @@ class GameModel
         $lowestScore = $this->db->single();
 
         if ($score > $lowestScore->lowestScore) {
-            // Update the scores table if $score is higher than the lowest score
-            $updateSql = "UPDATE scores SET usersScore = :score, usersName = :usersName WHERE usersScore = :lowestScore";
-            $this->db->query($updateSql);
+            // Insert the score and username into the scores table
+            $insertSql = "INSERT INTO scores (usersScore, usersName) VALUES (:score, :usersName)";
+            $this->db->query($insertSql);
             $this->db->bind(':score', $score);
             $this->db->bind(':usersName', $_SESSION['usersUid']);
-            $this->db->bind(':lowestScore', $lowestScore->lowestScore);
             $this->db->execute();
 
+            // Delete the lowest score from the scores table
+            $deleteSql = "DELETE FROM scores WHERE usersScore = :lowestScore LIMIT 1";
+            $this->db->query($deleteSql);
+            $this->db->bind(':lowestScore', $lowestScore->lowestScore);
+            $this->db->execute();
             // Print a message indicating the update
-            echo "\n You just dropped the lowest best score from the table : "
+            echo "\n You just dropped the lowest best score : "
                 . $lowestScore->lowestScore . "\n With your score of " . $score . " points";
         } else {
             echo "\n You didn't beat the lowest best score";
@@ -62,8 +66,8 @@ class GameModel
 
     public function handleGameover($score)
     {
-        $this->compareUserScore($score);
-        $this->compareBestScores($score);
+        $this->updateUserScore($score);
+        $this->updateBestScores($score);
     }
 
     public function getUsersBestScore()
@@ -79,9 +83,9 @@ class GameModel
         }
     }
 
-    public function getAllBestScores()
+    public function getTopScores($nb)
     {
-        $sql = "SELECT * FROM `scores`";
+        $sql = "SELECT * FROM `scores` ORDER BY usersScore DESC LIMIT $nb";
         $this->db->query($sql);
         $this->db->execute();
         $scores = $this->db->resultSet();
